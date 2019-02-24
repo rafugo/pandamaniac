@@ -19,22 +19,30 @@ for line in f1:
     sub1.append(line.strip())
     i += 1
 
+f1.close()
 
 # read in strategy 2
 f2 = open("submission_high_degree.txt", "r")
+
+
+# read in strategy 2
+f2 = open("submission_neighbors.txt", "r")
 sub2 = []
-j = 0
+i = 0
 for line in f2:
-    if j >= n:
+    if i >= n:
         break;
 
     sub2.append(line.strip())
-    j += 1
+    i += 1
+    
+f2.close()
 
 # submissions for the strategies
 strategies = {'strat1' : sub1, \
             'strat2': sub2}
 
+print(strategies)
 # run sim
 result = sim.run(graph, strategies)
 
