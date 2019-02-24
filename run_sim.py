@@ -21,9 +21,8 @@ for line in f1:
 
 f1.close()
 
-# read in strategy 2
-f2 = open("submission_high_degree.txt", "r")
-
+# # read in strategy 2
+# f2 = open("submission_high_degree.txt", "r")
 
 # read in strategy 2
 f2 = open("submission_neighbors.txt", "r")
