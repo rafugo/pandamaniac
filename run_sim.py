@@ -9,13 +9,13 @@ with open('testgraph1.json') as f:
     graph = json.load(f)
 
 # read in strategy 1
-f1 = open("submission.txt", "r")
+f1 = open("top_clustering_submission.txt", "r")
 sub1 = []
 i = 0
 for line in f1:
     if i >= n:
         break;
-
+    i += 1
     sub1.append(line.strip())
 
 
@@ -26,9 +26,8 @@ j = 0
 for line in f2:
     if j >= n:
         break;
-
+    j += 1
     sub2.append(line.strip())
-
 # submissions for the strategies
 strategies = {'strat1' : sub1, \
             'strat2': sub2}

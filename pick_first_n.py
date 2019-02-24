@@ -13,7 +13,7 @@ with open('testgraph1.json') as f:
 
 i = 0
 
-keys = graph.keys()
+keys = list(graph.keys())
 random.shuffle(keys)
 
 nodes = []
