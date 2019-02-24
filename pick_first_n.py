@@ -3,7 +3,7 @@
 import json
 import random
 
-n = 1
+n = 5
 
 # load in data
 with open('testgraph1.json') as f:
