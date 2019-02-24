@@ -17,10 +17,11 @@ for line in f1:
         break;
 
     sub1.append(line.strip())
+    i += 1
 
 
 # read in strategy 2
-f2 = open("submission.txt", "r")
+f2 = open("submission_high_degree.txt", "r")
 sub2 = []
 j = 0
 for line in f2:
@@ -28,6 +29,7 @@ for line in f2:
         break;
 
     sub2.append(line.strip())
+    j += 1
 
 # submissions for the strategies
 strategies = {'strat1' : sub1, \
