@@ -5,17 +5,6 @@ import random
 import networkx as nx
 import operator
 
-
-def top_node(node, neighbors):
-	node_set = set(node[2])
-	neighbor_set = set(neighbors)
-	if len(node_set.intersection(neighbors)) != 0:
-		return False
-	else:
-		return True
-
-
-
 n = 5
 
 # load in data
@@ -43,19 +32,8 @@ for point in clusters.keys():
 node_clustering = sorted(node_clustering, key=operator.itemgetter(1))[::-1]
 top_nodes = []
 
-i = 0
-neighbors = []
-for node in node_clustering:
-	if top_node(node, neighbors):
-		top_nodes.append(node[0])
-		neighbors.append(node[0])
-		neighbors += node[2]
-		
-	if len(top_nodes) >= n:
-		break
-
-
-
+for i in range(n):
+	top_nodes.append(node_clustering[i][0])
 
 # write the chosen nodes 50 times
 f = open("top_clustering_submission.txt", "w")

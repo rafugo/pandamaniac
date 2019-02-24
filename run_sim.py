@@ -9,7 +9,7 @@ with open('testgraph1.json') as f:
     graph = json.load(f)
 
 # read in strategy 1
-f1 = open("top_clustering_submission.txt", "r")
+f1 = open("top_closeness_submission.txt", "r")
 sub1 = []
 i = 0
 for line in f1:
@@ -17,7 +17,6 @@ for line in f1:
         break;
     i += 1
     sub1.append(line.strip())
-    i += 1
 
 f1.close()
 
@@ -25,15 +24,14 @@ f1.close()
 # f2 = open("submission_high_degree.txt", "r")
 
 # read in strategy 2
-f2 = open("submission_neighbors.txt", "r")
+f2 = open("submission_high_degree.txt", "r")
 sub2 = []
 j = 0
 for line in f2:
-    if i >= n:
+    if j >= n:
         break;
     j += 1
     sub2.append(line.strip())
-    j += 1
     
 f2.close()
 
