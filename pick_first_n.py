@@ -6,7 +6,7 @@ import random
 n = 5
 
 # load in data
-with open('testgraph1.json') as f:
+with open('testgraph2.json') as f:
     graph = json.load(f)
 
 # iterate through first n and save them

@@ -5,11 +5,11 @@ import json
 n = 5
 
 # read in the graph
-with open('testgraph1.json') as f:
+with open('testgraph2.json') as f:
     graph = json.load(f)
 
 # read in strategy 1
-f1 = open("submission.txt", "r")
+f1 = open("submission_high_degree.txt", "r")
 sub1 = []
 i = 0
 for line in f1:

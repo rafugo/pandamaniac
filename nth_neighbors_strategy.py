@@ -44,10 +44,10 @@ def findMostUniques(d, seen, nodes, nodesPicked):
 
 def main():
     # number of iterations deep we check
-    iterations = 2
+    iterations = 1
 
     # load in data
-    with open('testgraph1.json') as f:
+    with open('testgraph2.json') as f:
         graph = json.load(f)
 
     # iterate through all nodes and find how many nodes they could infect
@@ -107,8 +107,10 @@ def main():
 
     # we should now try to maximize how many we pick such that we get the most
     # amount of unique nodes
-    seen = list(seen_sets[ranking[-1]])
-    best_nodes = [ranking[-1]]
+    start_node = ranking[random.randint(int(totalNodes/4), 
+                                        int(3*totalNodes/4))]
+    seen = list(seen_sets[start_node])
+    best_nodes = [start_node]
     for i in range(2,n+1):
         new_node, seen = findMostUniques(seen_sets, seen, keys, best_nodes)
         print(len(seen))
