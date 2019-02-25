@@ -10,14 +10,15 @@ with open('testgraph2.json') as f:
 
 # read in strategy 1
 f1 = open("submission_high_degree.txt", "r")
+
+# f1 = open("top_closeness_submission.txt", "r")
 sub1 = []
 i = 0
 for line in f1:
     if i >= n:
         break;
-
-    sub1.append(line.strip())
     i += 1
+    sub1.append(line.strip())
 
 f1.close()
 
@@ -27,15 +28,15 @@ f1.close()
 # read in strategy 2
 f2 = open("submission_neighbors.txt", "r")
 sub2 = []
-i = 0
+j = 0
 for line in f2:
-    if i >= n:
+    if j >= n:
         break;
-
+    j += 1
     sub2.append(line.strip())
-    i += 1
     
 f2.close()
+
 
 # submissions for the strategies
 strategies = {'strat1' : sub1, \

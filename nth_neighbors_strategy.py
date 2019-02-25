@@ -42,6 +42,14 @@ def findMostUniques(d, seen, nodes, nodesPicked):
 
     return (bestNode, newSeen)
 
+def getBestNodeNotSeen(nodes, nodesPicked):
+    for node in nodes[::-1]:
+        print(node)
+        if node not in nodesPicked:
+            return node
+
+    return None
+
 def main():
     # number of iterations deep we check
     iterations = 1
@@ -107,8 +115,7 @@ def main():
 
     # we should now try to maximize how many we pick such that we get the most
     # amount of unique nodes
-    start_node = ranking[random.randint(int(totalNodes/4), 
-                                        int(3*totalNodes/4))]
+    start_node = ranking[-1]
     seen = list(seen_sets[start_node])
     best_nodes = [start_node]
     for i in range(2,n+1):
@@ -116,7 +123,7 @@ def main():
         print(len(seen))
 
         if new_node == None:
-            new_node = random.randint(0, totalNodes)
+            new_node = getBestNodeNotSeen(keys, best_nodes)
         best_nodes.append(new_node)
 
     print("best nodes are: " + str(best_nodes))

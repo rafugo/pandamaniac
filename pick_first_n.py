@@ -6,14 +6,14 @@ import random
 n = 5
 
 # load in data
-with open('testgraph2.json') as f:
+with open('test_graphs/test_graph_gnp_1500_0.2.json') as f:
     graph = json.load(f)
 
 # iterate through first n and save them
 
 i = 0
 
-keys = graph.keys()
+keys = list(graph.keys())
 random.shuffle(keys)
 
 nodes = []
