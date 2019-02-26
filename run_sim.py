@@ -2,7 +2,7 @@ import sim
 import json
 
 # number of nodes that are submitted
-n = 5
+n = 20
 
 # read in the graph
 with open('testgraph2.json') as f:
@@ -26,7 +26,7 @@ f1.close()
 # f2 = open("submission_high_degree.txt", "r")
 
 # read in strategy 2
-f2 = open("submission_neighbors.txt", "r")
+f2 = open("better_top_closeness_submission.txt", "r")
 sub2 = []
 j = 0
 for line in f2:
@@ -42,7 +42,8 @@ f2.close()
 strategies = {'strat1' : sub1, \
             'strat2': sub2}
 
-print(strategies)
+print(strategies['strat1'])
+print(strategies['strat2'])
 # run sim
 result = sim.run(graph, strategies)
 
