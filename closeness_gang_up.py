@@ -3,15 +3,12 @@ import networkx as nx
 import operator
 
 # number of nodes that are submitted
-n = 10
-
-# number of ppl playing
-ppl = 2
+n = 35
 
 # number considered of top degree nodes
-num_considered = n * ppl
+num_considered = n * 3
 
-with open('2.10.21.json') as f:
+with open('8.35.2.json') as f:
     graph = json.load(f)
 
 keys = graph.keys()
@@ -49,19 +46,36 @@ while i < len(graph):
 node_closeness = []
 for node in high_degree_nodes:
     c = nx.closeness_centrality(G, node)
-    node_closeness.append((node, c, list(G[node])))
+    node_closeness.append((node, c))
 
-node_closeness = sorted(node_closeness, key=operator.itemgetter(1))[::-1]
-top_nodes = []
+top_node = max(node_closeness, key = operator.itemgetter(1))
 
-for i in range(n):
-    top_nodes.append(node_closeness[i][0])
+top_neighbor_degrees = []
+neighbors = list(G[top_node[0]])
+for node in neighbors:
+    degree = len(G[node])
+    top_neighbor_degrees.append((node, degree))
+
+top_neighbor_degrees = sorted(top_neighbor_degrees, key = operator.itemgetter(1))[::-1]
+
+if len(top_neighbor_degrees) > num_considered:
+    top_neighbor_degrees = top_neighbor_degrees[:num_considered]
+
+top_neighbors = []
+for node in top_neighbor_degrees:
+    close = nx.closeness_centrality(G, node[0])
+    top_neighbors.append((node[0], close))
+
+top_nodes = sorted(top_neighbors ,key=operator.itemgetter(1))[::-1]
+top_nodes = top_nodes[:n]
+
+
     
 # write the chosen nodes 50 times
-f = open("better_top_closeness_submission.txt", "w")
+f = open("closeness_gang_up_submission.txt", "w")
 submission_str = ''
 for node in top_nodes:
-    submission_str += str(node) + '\n'
+    submission_str += str(node[0]) + '\n'
 
 for i in range(50):
     f.write(submission_str)
