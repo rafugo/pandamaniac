@@ -5,10 +5,10 @@ import random
 import networkx as nx
 import operator
 
-n = 20
+n = 10
 
 # load in data
-with open('testgraph2.json') as f:
+with open('2.10.33.json') as f:
     graph = json.load(f)
 
 # iterate through first n and save them

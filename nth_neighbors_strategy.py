@@ -4,7 +4,7 @@ import random
 import bisect as b
 
 # number of seeds
-n = 5
+n = 35
 
 # finds number of unique values that exist in node compared to seen
 def compareUniques(d, seen, node):
@@ -55,7 +55,7 @@ def main():
     iterations = 1
 
     # load in data
-    with open('testgraph2.json') as f:
+    with open('test_graphs/1.8.35.1.json') as f:
         graph = json.load(f)
 
     # iterate through all nodes and find how many nodes they could infect

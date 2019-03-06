@@ -3,12 +3,12 @@ import networkx as nx
 import operator
 
 # number of nodes that are submitted
-n = 35
+n = 40
 
 # number considered of top degree nodes
-num_considered = n * 3
+num_considered = 2 * n
 
-with open('8.35.2.json') as f:
+with open('8.40.2.json') as f:
     graph = json.load(f)
 
 keys = graph.keys()
@@ -48,29 +48,36 @@ for node in high_degree_nodes:
     c = nx.closeness_centrality(G, node)
     node_closeness.append((node, c))
 
+# get the top degree node
 top_node = max(node_closeness, key = operator.itemgetter(1))
 
+# get the degrees of all the neighbors
 top_neighbor_degrees = []
 neighbors = list(G[top_node[0]])
 for node in neighbors:
     degree = len(G[node])
     top_neighbor_degrees.append((node, degree))
 
+# sort the neighbors based on degrees
 top_neighbor_degrees = sorted(top_neighbor_degrees, key = operator.itemgetter(1))[::-1]
 
+# chop off any extra nodes we dont care about
 if len(top_neighbor_degrees) > num_considered:
     top_neighbor_degrees = top_neighbor_degrees[:num_considered]
 
+# grab the top neighbors wrt centrality
 top_neighbors = []
 for node in top_neighbor_degrees:
-    close = nx.closeness_centrality(G, node[0])
-    top_neighbors.append((node[0], close))
+    cluster = nx.clustering(G, node[0])
+    top_neighbors.append((node[0], cluster))
 
+# sort by centrality on the top neighbors
 top_nodes = sorted(top_neighbors ,key=operator.itemgetter(1))[::-1]
+
+# grab the top n nodes
 top_nodes = top_nodes[:n]
 
 
-    
 # write the chosen nodes 50 times
 f = open("closeness_gang_up_submission.txt", "w")
 submission_str = ''

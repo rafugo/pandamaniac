@@ -3,15 +3,15 @@ import networkx as nx
 import operator
 
 # number of nodes that are submitted
-n = 10
+n = 20
 
-# number of ppl playing
 ppl = 2
 
-# number considered of top degree nodes
+
+# # number considered of top degree nodes
 num_considered = n * ppl
 
-with open('test_graphs/1.8.35.1.json') as f:
+with open('6.20.1.json') as f:
     graph = json.load(f)
 
 keys = graph.keys()
@@ -45,20 +45,53 @@ while i < len(graph):
                 min = (node, len(graph[node]))
     i += 1
 
-# get the top n closeness nodes from these nodes
-node_closeness = []
-for node in high_degree_nodes:
-    c = nx.closeness_centrality(G, node)
-    node_closeness.append((node, c, list(G[node])))
+high_degree_nodes = sorted(high_degree_nodes)
 
-node_closeness = sorted(node_closeness, key=operator.itemgetter(1))[::-1]
+cliques = nx.cliques_containing_node(G, high_degree_nodes)
+
+max_size = 0
+best_node = 0
+max_index = 0
+for key in cliques:
+    j = 0
+    for lst in cliques[key]:
+        if max_size < len(lst):
+            max_size = len(lst)
+            max_index = j
+            best_node = key
+        j+=1
+
+best_clique = cliques[best_node][max_index]
+print("size of best clique: ", max_size)
+print("best_clique: ", best_clique)
+print("best_node: ", best_node)
+
 top_nodes = []
+for i in range(len(best_clique)):
+    c = nx.closeness_centrality(G, best_clique[i])
+    top_nodes.append((best_clique[i], c))
 
-for i in range(n):
-    top_nodes.append(node_closeness[i][0])
+top_nodes = sorted(top_nodes, key=operator.itemgetter(1))[::-1]
+
+# take out the closeness part
+for i in range(len(top_nodes)):
+    top_nodes[i] = top_nodes[i][0]
+
+print("Top nodes: ", top_nodes)
+
+if len(top_nodes) < n:
+    i = -1
+    while len(top_nodes) < n:
+        top_nodes.append(high_degree_nodes[i])
+        i -= 1
+
+else:
+    top_nodes = top_nodes[:n]
+
+
     
 # write the chosen nodes 50 times
-f = open("better_top_closeness_submission.txt", "w")
+f = open("clique_submission.txt", "w")
 submission_str = ''
 for node in top_nodes:
     submission_str += str(node) + '\n'

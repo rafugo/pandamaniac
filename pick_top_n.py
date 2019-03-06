@@ -3,10 +3,10 @@
 import json
 import random
 
-n = 20
+n = 10
 
 # load in data
-with open('testgraph2.json') as f:
+with open('2.10.33.json') as f:
     graph = json.load(f)
 
 # iterate through first n and save them
@@ -38,7 +38,7 @@ while i < len(graph):
     i += 1
 
         
-
+print(len(nodes))
 
         
 
